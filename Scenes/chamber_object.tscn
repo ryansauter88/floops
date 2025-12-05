@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6xrsifklddu5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lpde8"]
+bounce = 0.5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iti4p"]
+size = Vector2(1920, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dtjkg"]
+size = Vector2(20, 1280)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eglq2"]
+size = Vector2(20, 1280)
+
+[node name="ChamberObject" type="Node2D"]
+
+[node name="Ceiling" type="StaticBody2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(960, 10)
+collision_mask = 14
+physics_material_override = SubResource("PhysicsMaterial_lpde8")
+
+[node name="CeilingShape" type="CollisionShape2D" parent="Ceiling"]
+shape = SubResource("RectangleShape2D_iti4p")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(960, 1270)
+collision_mask = 14
+physics_material_override = SubResource("PhysicsMaterial_lpde8")
+
+[node name="FloorShape" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("RectangleShape2D_iti4p")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(10, 640)
+collision_mask = 14
+physics_material_override = SubResource("PhysicsMaterial_lpde8")
+
+[node name="RightWallShape" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RectangleShape2D_dtjkg")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1910, 640)
+collision_mask = 14
+physics_material_override = SubResource("PhysicsMaterial_lpde8")
+
+[node name="LeftWallShape" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("RectangleShape2D_eglq2")

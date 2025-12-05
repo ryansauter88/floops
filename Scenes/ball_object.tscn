@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2bftajov8aop"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iti4p"]
+friction = 0.5
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lpde8"]
+radius = 30.0
+
+[node name="BallObject" type="Node2D"]
+
+[node name="BallBody" type="RigidBody2D" parent="."]
+collision_layer = 8
+collision_mask = 31
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_iti4p")
+gravity_scale = 0.525
+
+[node name="BallShape" type="CollisionShape2D" parent="BallBody"]
+shape = SubResource("CircleShape2D_lpde8")
+debug_color = Color(3.946722e-06, 0.6452341, 0.2710113, 0.41960785)

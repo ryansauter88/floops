@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfkoxxnwqjqes"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_eglq2"]
+bounce = 0.15
+absorbent = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eglq2"]
+radius = 15.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eglq2"]
+size = Vector2(20, 190)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rsyfn"]
+radius = 3.0
+height = 100.0
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_7w7ni"]
+a = Vector2(30, 0)
+b = Vector2(-30, 0)
+
+[node name="HoopObject" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 14
+physics_material_override = SubResource("PhysicsMaterial_eglq2")
+
+[node name="BackRim" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-50, 0)
+shape = SubResource("CircleShape2D_eglq2")
+debug_color = Color(0.14217529, 1.8289685e-06, 0.66683275, 0.41960785)
+
+[node name="FrontRim" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(50, 0)
+shape = SubResource("CircleShape2D_eglq2")
+debug_color = Color(0.14217529, 1.8289685e-06, 0.66683275, 0.41960785)
+
+[node name="Backboard" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-70, -80)
+shape = SubResource("RectangleShape2D_eglq2")
+
+[node name="FrontNet" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(40, 48)
+rotation = 0.2617994
+shape = SubResource("CapsuleShape2D_rsyfn")
+one_way_collision_margin = 50.0
+
+[node name="BackNet" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-40, 48)
+rotation = -0.2617994
+shape = SubResource("CapsuleShape2D_rsyfn")
+one_way_collision_margin = 50.0
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("SegmentShape2D_7w7ni")
