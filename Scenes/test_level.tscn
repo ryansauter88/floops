@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bwgmvuwsst2tc"]
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="FloorObject" type="Node2D" parent="."]
+
+[node name="PlayerObject" type="Node2D" parent="."]
+
+[node name="HoopObject" type="Node2D" parent="."]
+
+[node name="UIObject" type="CanvasLayer" parent="."]
+
+[node name="ScoreboardObject" type="Control" parent="UIObject"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TimerObject" type="Control" parent="UIObject"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
