@@ -1,22 +1,23 @@
+using System;
 using Godot;
 
 [GlobalClass]
 public partial class State : Node {
     [Export] public string animationName;
+    [Export] public float torque;
     public Node2D parent;
     public RigidBody2D body;
     public AnimatedSprite2D animations;
     public Controller controller;
-    public Vector2 movement;
+    public float rotationInput;
     public string currentAnim;
 
     public override void _Ready()
     {
-        body = parent.GetNode<RigidBody2D>("PlayerBody");
         base._Ready();
     }
     public virtual void Enter() {
-        animations.Play(animationName);
+        // animations.Play(animationName);
     }
     public virtual void Exit() {
     }
@@ -31,13 +32,13 @@ public partial class State : Node {
         return null;
     }
 
-    public Vector2 GetMovementInput() {
-        return controller.GetMovementDirection();
+    public float GetMovementFloat() {
+        return controller.GetMovementFloat();
     }
     public bool GetAttackInput() {
         return controller.WantsAttack();
     }
-    public bool GetBoostInput() {
-        return controller.WantsBoost();
+    public bool GetDashInput() {
+        return controller.WantsDash();
     }
 }

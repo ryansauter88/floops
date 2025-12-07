@@ -1,8 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://bw5ow7pii62tr"]
+[gd_scene load_steps=12 format=3 uid="uid://bw5ow7pii62tr"]
 
 [ext_resource type="Script" uid="uid://bgp7vsb1csn8b" path="res://Scripts/Objects/PlayerObject.cs" id="1_hht1k"]
 [ext_resource type="Script" uid="uid://dpju0g417il1a" path="res://Scripts/Components/Controller.cs" id="2_1chhl"]
 [ext_resource type="Script" uid="uid://saf2jr6ip77u" path="res://Scripts/Components/StateMachine.cs" id="3_ql2wm"]
+[ext_resource type="Script" uid="uid://cv54y4hd2srm8" path="res://Scripts/States/FullCharge.cs" id="4_1chhl"]
+[ext_resource type="Script" uid="uid://bls8mw74mxcg" path="res://Scripts/States/Dashing.cs" id="4_s28li"]
+[ext_resource type="Script" uid="uid://cjme5uv7rk2le" path="res://Scripts/States/HalfCharge.cs" id="6_7spit"]
+[ext_resource type="Script" uid="uid://dfcsht6b5i2as" path="res://Scripts/States/NoCharge.cs" id="7_lsp30"]
+[ext_resource type="Script" uid="uid://dy56x640n67xl" path="res://Scripts/States/Inactive.cs" id="8_akg4s"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dtjkg"]
 bounce = 0.25
@@ -22,6 +27,7 @@ collision_mask = 31
 mass = 0.25
 physics_material_override = SubResource("PhysicsMaterial_dtjkg")
 gravity_scale = 0.05
+inertia = 1.0
 
 [node name="LeftLeg" type="CollisionShape2D" parent="PlayerBody"]
 position = Vector2(-27, 0)
@@ -48,5 +54,22 @@ debug_color = Color(0.73103726, 0.4731201, 3.85046e-07, 0.41960785)
 [node name="Controller" type="Node" parent="."]
 script = ExtResource("2_1chhl")
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("startingState")]
 script = ExtResource("3_ql2wm")
+startingState = NodePath("fullcharge")
+
+[node name="dashing" type="Node" parent="StateMachine"]
+script = ExtResource("4_s28li")
+
+[node name="fullcharge" type="Node" parent="StateMachine"]
+script = ExtResource("4_1chhl")
+torque = 20.0
+
+[node name="halfcharge" type="Node" parent="StateMachine"]
+script = ExtResource("6_7spit")
+
+[node name="nocharge" type="Node" parent="StateMachine"]
+script = ExtResource("7_lsp30")
+
+[node name="inactive" type="Node" parent="StateMachine"]
+script = ExtResource("8_akg4s")

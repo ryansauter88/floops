@@ -8,7 +8,7 @@ public partial class StateMachine : Node
     public State currentState;
 
     public void init(Node2D parent, AnimatedSprite2D animations, Controller controller) {
-        Godot.Collections.Array<Node> childArray = GetChildren();
+        Array<Node> childArray = GetChildren();
         for (int i = 0; i < childArray.Count; i++) {
             State child = (State)childArray[i];
             child.parent = parent;
@@ -21,7 +21,6 @@ public partial class StateMachine : Node
 
     public void ChangeState(State newState) {
         if (currentState != null) {currentState.Exit();}
-
         currentState = newState;
         currentState.Enter();
     }
@@ -36,7 +35,6 @@ public partial class StateMachine : Node
     }
     public void ProcessInput(InputEvent @event) {
         State newState = currentState.ProcessInput(@event);
-
         if (newState != null) {ChangeState(newState);};
     }
 }

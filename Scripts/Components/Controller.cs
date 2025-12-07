@@ -11,13 +11,13 @@ public partial class Controller : Node {
         processing physics and attempting to act (denied if state logic determines unable).
     */
     
-    public Vector2 moveInput = new(0f,0f);
+    public float moveInput = 0;
 
     public bool attackPress = false;
 
     public bool dashPress = false;
 
-    public Vector2 GetMovementDirection() {
+    public float GetMovementFloat() {
         return moveInput;
     }
     public bool WantsAttack() {

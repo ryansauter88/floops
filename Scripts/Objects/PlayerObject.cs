@@ -3,18 +3,32 @@ using System;
 
 public partial class PlayerObject : Node2D
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
+    public AnimatedSprite2D animations;
+    public StateMachine stateMachine;
+	public Controller controller;
+    public override void _Ready()
+    {
+        animations = null; //GetNode<AnimatedSprite2D>("Animations");
+        stateMachine = GetNode<StateMachine>("StateMachine");
+        controller = GetNode<Controller>("Controller");
+        stateMachine.init(this, animations, controller);
+    }
 
 	public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
         if (Input.IsActionPressed("move_left") || Input.IsActionPressed("move_right")){
-            controller.moveInput = Input.GetVector("move_left","move_right","move_up","move_down");
+            controller.moveInput = Input.GetAxis("move_left","move_right");
         } else {
-            // StandStill();
+            controller.moveInput = 0;
+        }
+
+        stateMachine.PhysicsProcess((float)delta);
+    }
+
+    public override void _Process(double delta) {
+        base._Process(delta);
+        stateMachine.Process((float)delta);
     }
 
 	public override void _UnhandledInput(InputEvent @event) {
@@ -28,7 +42,6 @@ public partial class PlayerObject : Node2D
             // bufferTimer.Start();
             controller.dashPress = true;
         }
-
 		stateMachine.ProcessInput(@event);
 	}
 }
