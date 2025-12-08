@@ -2,16 +2,16 @@ using Godot;
 
 public partial class NoCharge : State
 {
-    // [Export] State dashing;
-    // [Export] State halfCharge;
-    // [Export] State noCharge;
-    // [Export] State inactiveCharge;
+    [Export] State dashing;
+    [Export] State halfCharge;
+    [Export] State inactive;
 
     public override State PhysicsProcess(float delta)
     {
         body = parent.GetNode<RigidBody2D>("PlayerBody");
         ProcessRotation(body);
-        return base.PhysicsProcess(delta);
+        if (parent.dashTank == 1) {return halfCharge;}
+        return null;
     }
 
     public void ProcessRotation(RigidBody2D rigidBody)

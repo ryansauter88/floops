@@ -7,7 +7,7 @@ public partial class StateMachine : Node
     [Export] State startingState;
     public State currentState;
 
-    public void init(Node2D parent, AnimatedSprite2D animations, Controller controller) {
+    public void init(PlayerObject parent, AnimatedSprite2D animations, Controller controller) {
         Array<Node> childArray = GetChildren();
         for (int i = 0; i < childArray.Count; i++) {
             State child = (State)childArray[i];
@@ -26,6 +26,7 @@ public partial class StateMachine : Node
     }
 
     public void PhysicsProcess(float delta) {
+        GD.Print("CURRENT STATE -- " + currentState.Name);
         State newState = currentState.PhysicsProcess(delta);
         if (newState != null) {ChangeState(newState);}
     }

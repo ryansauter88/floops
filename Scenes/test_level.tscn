@@ -20,7 +20,7 @@ position = Vector2(1820, 350)
 scale = Vector2(-1, 1)
 
 [node name="BallObject" parent="." instance=ExtResource("3_7w7ni")]
-position = Vector2(106, 343)
+position = Vector2(755, 304)
 
 [node name="CanvasObject" type="CanvasLayer" parent="."]
 

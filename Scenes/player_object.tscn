@@ -20,14 +20,17 @@ radius = 20.0
 
 [node name="PlayerObject" type="Node2D"]
 script = ExtResource("1_hht1k")
+dashRefillDuration = 120
 
 [node name="PlayerBody" type="RigidBody2D" parent="."]
+position = Vector2(-1, 0)
 collision_layer = 2
 collision_mask = 31
-mass = 0.25
+mass = 0.5
 physics_material_override = SubResource("PhysicsMaterial_dtjkg")
-gravity_scale = 0.05
-inertia = 1.0
+gravity_scale = 0.1
+center_of_mass_mode = 1
+inertia = 25.0
 
 [node name="LeftLeg" type="CollisionShape2D" parent="PlayerBody"]
 position = Vector2(-27, 0)
@@ -58,18 +61,39 @@ script = ExtResource("2_1chhl")
 script = ExtResource("3_ql2wm")
 startingState = NodePath("fullcharge")
 
-[node name="dashing" type="Node" parent="StateMachine"]
+[node name="dashing" type="Node" parent="StateMachine" node_paths=PackedStringArray("fullCharge", "halfCharge", "noCharge", "inactive")]
 script = ExtResource("4_s28li")
+fullCharge = NodePath("../fullcharge")
+halfCharge = NodePath("../halfcharge")
+noCharge = NodePath("../nocharge")
+inactive = NodePath("../inactive")
+dashForce = 900.0
+torque = 300.0
 
-[node name="fullcharge" type="Node" parent="StateMachine"]
+[node name="fullcharge" type="Node" parent="StateMachine" node_paths=PackedStringArray("dashing", "inactive")]
 script = ExtResource("4_1chhl")
-torque = 20.0
+dashing = NodePath("../dashing")
+inactive = NodePath("../inactive")
+torque = 300.0
 
-[node name="halfcharge" type="Node" parent="StateMachine"]
+[node name="halfcharge" type="Node" parent="StateMachine" node_paths=PackedStringArray("dashing", "fullCharge", "inactive")]
 script = ExtResource("6_7spit")
+dashing = NodePath("../dashing")
+fullCharge = NodePath("../fullcharge")
+inactive = NodePath("../inactive")
+torque = 300.0
 
-[node name="nocharge" type="Node" parent="StateMachine"]
+[node name="nocharge" type="Node" parent="StateMachine" node_paths=PackedStringArray("dashing", "halfCharge", "inactive")]
 script = ExtResource("7_lsp30")
+dashing = NodePath("../dashing")
+halfCharge = NodePath("../halfcharge")
+inactive = NodePath("../inactive")
+torque = 300.0
 
-[node name="inactive" type="Node" parent="StateMachine"]
+[node name="inactive" type="Node" parent="StateMachine" node_paths=PackedStringArray("dashing", "halfCharge", "noCharge", "fullCharge")]
 script = ExtResource("8_akg4s")
+dashing = NodePath("../dashing")
+halfCharge = NodePath("../halfcharge")
+noCharge = NodePath("../nocharge")
+fullCharge = NodePath("../fullcharge")
+torque = 300.0

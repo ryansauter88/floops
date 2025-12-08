@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2bftajov8aop"]
+[gd_scene load_steps=3 format=3 uid="uid://2guxaj6o2v7e"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iti4p"]
 friction = 0.5
@@ -12,9 +12,9 @@ radius = 30.0
 [node name="BallBody" type="RigidBody2D" parent="."]
 collision_layer = 8
 collision_mask = 31
-mass = 0.1
+mass = 0.05
 physics_material_override = SubResource("PhysicsMaterial_iti4p")
-gravity_scale = 0.525
+gravity_scale = 0.6
 
 [node name="BallShape" type="CollisionShape2D" parent="BallBody"]
 shape = SubResource("CircleShape2D_lpde8")

@@ -5,7 +5,7 @@ using Godot;
 public partial class State : Node {
     [Export] public string animationName;
     [Export] public float torque;
-    public Node2D parent;
+    public PlayerObject parent;
     public RigidBody2D body;
     public AnimatedSprite2D animations;
     public Controller controller;
