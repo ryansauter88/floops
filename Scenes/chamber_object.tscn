@@ -49,3 +49,42 @@ physics_material_override = SubResource("PhysicsMaterial_lpde8")
 
 [node name="RightWallShape" type="CollisionShape2D" parent="RightWall"]
 shape = SubResource("RectangleShape2D_eglq2")
+
+[node name="TopLeftBumper" type="StaticBody2D" parent="."]
+position = Vector2(160, 20)
+collision_mask = 14
+physics_material_override = SubResource("PhysicsMaterial_lpde8")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="TopLeftBumper"]
+scale = Vector2(2, 2)
+polygon = PackedVector2Array(0, 0, -10, 2, -20, 5, -30, 10, -40, 16, -48, 24, -55, 34, -61, 50, -66, 68, -70, 88, -70, 0, 0, 0)
+
+[node name="TopRightBumper" type="StaticBody2D" parent="."]
+position = Vector2(1760, 20)
+scale = Vector2(-1, 1)
+collision_mask = 14
+physics_material_override = SubResource("PhysicsMaterial_lpde8")
+
+[node name="CollisionShape2D2" type="CollisionPolygon2D" parent="TopRightBumper"]
+scale = Vector2(2, 2)
+polygon = PackedVector2Array(0, 0, -10, 2, -20, 5, -30, 10, -40, 16, -48, 24, -55, 34, -61, 50, -66, 68, -70, 88, -70, 0, 0, 0)
+
+[node name="BottomRightBumper" type="StaticBody2D" parent="."]
+position = Vector2(1760, 1260)
+scale = Vector2(-1, -1)
+collision_mask = 14
+physics_material_override = SubResource("PhysicsMaterial_lpde8")
+
+[node name="CollisionShape2D2" type="CollisionPolygon2D" parent="BottomRightBumper"]
+scale = Vector2(2, 2)
+polygon = PackedVector2Array(0, 0, -10, 2, -20, 5, -30, 10, -40, 16, -48, 24, -55, 34, -61, 50, -66, 68, -70, 88, -70, 0, 0, 0)
+
+[node name="BottomLeftBumper" type="StaticBody2D" parent="."]
+position = Vector2(160, 1260)
+scale = Vector2(1, -1)
+collision_mask = 14
+physics_material_override = SubResource("PhysicsMaterial_lpde8")
+
+[node name="CollisionShape2D2" type="CollisionPolygon2D" parent="BottomLeftBumper"]
+scale = Vector2(2, 2)
+polygon = PackedVector2Array(0, 0, -10, 2, -20, 5, -30, 10, -40, 16, -48, 24, -55, 34, -61, 50, -66, 68, -70, 88, -70, 0, 0, 0)
