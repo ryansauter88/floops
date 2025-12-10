@@ -26,7 +26,6 @@ public partial class StateMachine : Node
     }
 
     public void PhysicsProcess(float delta) {
-        GD.Print("CURRENT STATE -- " + currentState.Name);
         State newState = currentState.PhysicsProcess(delta);
         if (newState != null) {ChangeState(newState);}
     }

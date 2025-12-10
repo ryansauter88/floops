@@ -9,16 +9,25 @@ public partial class Dashing : State
     [Export] float dashForce = 30;
     [Export] int dashDuration = 15;
     private int dashCurrentTimer = 0;
+    private bool tankCheck = false;
 
     public override void Enter()
     {
         base.Enter();
+        if (parent.dashTank <= 0) {tankCheck = true;}
+        else {parent.dashTank -= 1;}
         dashCurrentTimer = dashDuration + 1;
         controller.dashPress = false;
     }
 
     public override State PhysicsProcess(float delta)
     {
+        GD.Print("tankCheck == " + tankCheck);
+        if (tankCheck)
+        {
+            tankCheck = false;
+            return noCharge;
+        }
         body = parent.GetNode<RigidBody2D>("PlayerBody");
         ProcessDash(body);
         ProcessRotation(body);
@@ -43,10 +52,6 @@ public partial class Dashing : State
     public void ProcessRotation(RigidBody2D rigidBody)
     {
         rotationInput = controller.GetMovementFloat();
-        GD.Print("ROTATION INPUT " + rotationInput);
-        GD.Print("ANGULAR VELOCITY " + rigidBody.AngularVelocity);
-        GD.Print("LINEAR VELOCITY " + rigidBody.LinearVelocity);
-        GD.Print("INERTIA " + rigidBody.Inertia);
         rigidBody.ApplyTorque(rotationInput * torque);
     }
 }

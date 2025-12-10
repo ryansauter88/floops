@@ -2,10 +2,10 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iti4p"]
 friction = 0.5
-bounce = 1.0
+bounce = 0.6
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lpde8"]
-radius = 30.0
+radius = 40.0
 
 [node name="BallObject" type="Node2D"]
 

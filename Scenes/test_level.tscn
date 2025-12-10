@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bwgmvuwsst2tc"]
 
-[ext_resource type="PackedScene" path="res://Scenes/chamber_object.tscn" id="1_eglq2"]
+[ext_resource type="PackedScene" uid="uid://dcwc1d8tnrwg1" path="res://Scenes/chamber_object.tscn" id="1_eglq2"]
 [ext_resource type="PackedScene" uid="uid://bw5ow7pii62tr" path="res://Scenes/player_object.tscn" id="2_rsyfn"]
-[ext_resource type="PackedScene" path="res://Scenes/ball_object.tscn" id="3_7w7ni"]
-[ext_resource type="PackedScene" path="res://Scenes/hoop_object.tscn" id="3_rsyfn"]
+[ext_resource type="PackedScene" uid="uid://2guxaj6o2v7e" path="res://Scenes/ball_object.tscn" id="3_7w7ni"]
+[ext_resource type="PackedScene" uid="uid://ccqccq3tehgdp" path="res://Scenes/hoop_object.tscn" id="3_rsyfn"]
 
 [node name="TestLevel" type="Node2D"]
 
@@ -13,10 +13,10 @@
 position = Vector2(353, 1163)
 
 [node name="HoopObject" parent="." instance=ExtResource("3_rsyfn")]
-position = Vector2(100, 350)
+position = Vector2(125, 600)
 
 [node name="HoopObject2" parent="." instance=ExtResource("3_rsyfn")]
-position = Vector2(1820, 350)
+position = Vector2(1795, 600)
 scale = Vector2(-1, 1)
 
 [node name="BallObject" parent="." instance=ExtResource("3_7w7ni")]

@@ -26,13 +26,14 @@ public partial class PlayerObject : Node2D
             controller.moveInput = 0;
         }
 
-        if (dashTank < 2) {dashRefillTImer += 1;}
-        if (dashRefillTImer >= dashRefillDuration || dashTank >= 2)
+        if (dashRefillTImer >= dashRefillDuration)
         {
             dashRefillTImer = 0;
             dashTank += 1;
         } else {dashRefillTImer += 1;}
-        
+        if (dashTank > 2) {dashTank = 2;}
+        GD.Print(dashTank);
+
         stateMachine.PhysicsProcess((float)delta);
     }
 
@@ -51,7 +52,6 @@ public partial class PlayerObject : Node2D
             // lastInput = "dash";
             // bufferTimer.Start();
             controller.dashPress = true;
-            dashTank -= 1;
         }
 		stateMachine.ProcessInput(@event);
 	}
