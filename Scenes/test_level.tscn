@@ -10,7 +10,7 @@
 [node name="ChamberObject" parent="." instance=ExtResource("1_eglq2")]
 
 [node name="PlayerObject" parent="." instance=ExtResource("2_rsyfn")]
-position = Vector2(353, 1163)
+position = Vector2(428, 797)
 
 [node name="HoopObject" parent="." instance=ExtResource("3_rsyfn")]
 position = Vector2(125, 600)

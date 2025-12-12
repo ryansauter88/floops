@@ -98,3 +98,9 @@ halfCharge = NodePath("../halfcharge")
 noCharge = NodePath("../nocharge")
 fullCharge = NodePath("../fullcharge")
 torque = 500.0
+
+[node name="InputBufferTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[connection signal="timeout" from="InputBufferTimer" to="." method="InputBufferTimerTimeout"]

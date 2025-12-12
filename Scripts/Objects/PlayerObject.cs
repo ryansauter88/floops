@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class PlayerObject : Node2D
 {
@@ -9,14 +8,30 @@ public partial class PlayerObject : Node2D
     public int dashRefillTImer = 0;
     [Export] int dashRefillDuration = 30; //time to refill one charge in the dash tank
     public int dashTank = 2;
+    private Timer bufferTimer;
+    private string lastInput;
     public override void _Ready()
     {
         animations = null; //GetNode<AnimatedSprite2D>("Animations");
         stateMachine = GetNode<StateMachine>("StateMachine");
         controller = GetNode<Controller>("Controller");
+        bufferTimer = GetNode<Timer>("InputBufferTimer");
         stateMachine.init(this, animations, controller);
     }
 
+	public override void _UnhandledInput(InputEvent @event) {
+		if(@event.IsActionPressed("attack")) {
+            lastInput = "attack";
+            bufferTimer.Start();
+            controller.attackPress = true;
+        }
+        if(@event.IsActionPressed("dash")) {
+            lastInput = "dash";
+            bufferTimer.Start();
+            controller.dashPress = true;
+        }
+		stateMachine.ProcessInput(@event);
+	}
 	public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
@@ -42,17 +57,9 @@ public partial class PlayerObject : Node2D
         stateMachine.Process((float)delta);
     }
 
-	public override void _UnhandledInput(InputEvent @event) {
-		if(@event.IsActionPressed("attack")) {
-            // lastInput = "attack";
-            // bufferTimer.Start();
-            controller.attackPress = true;
-        }
-        if(@event.IsActionPressed("dash")) {
-            // lastInput = "dash";
-            // bufferTimer.Start();
-            controller.dashPress = true;
-        }
-		stateMachine.ProcessInput(@event);
-	}
+    public void InputBufferTimerTimeout() {
+        if (lastInput == "dash") {controller.dashPress = false;}
+        if (lastInput == "attack") {controller.attackPress = false;}
+        lastInput = "";
+    }
 }
