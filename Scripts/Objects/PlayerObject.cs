@@ -6,6 +6,7 @@ public partial class PlayerObject : Node2D
     public StateMachine stateMachine;
 	public Controller controller;
     public int dashRefillTImer = 0;
+    public Vector2 startPos;
     [Export] int dashRefillDuration = 30; //time to refill one charge in the dash tank
     public int dashTank = 2;
     private Timer bufferTimer;
@@ -17,6 +18,7 @@ public partial class PlayerObject : Node2D
         controller = GetNode<Controller>("Controller");
         bufferTimer = GetNode<Timer>("InputBufferTimer");
         stateMachine.init(this, animations, controller);
+        startPos = GlobalPosition;
     }
 
 	public override void _UnhandledInput(InputEvent @event) {
@@ -47,7 +49,6 @@ public partial class PlayerObject : Node2D
             dashTank += 1;
         } else {dashRefillTImer += 1;}
         if (dashTank > 2) {dashTank = 2;}
-        GD.Print(dashTank);
 
         stateMachine.PhysicsProcess((float)delta);
     }

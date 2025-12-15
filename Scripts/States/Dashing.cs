@@ -22,7 +22,6 @@ public partial class Dashing : State
 
     public override State PhysicsProcess(float delta)
     {
-        GD.Print("tankCheck == " + tankCheck);
         if (tankCheck)
         {
             tankCheck = false;
