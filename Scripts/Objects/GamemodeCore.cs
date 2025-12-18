@@ -1,10 +1,32 @@
-using System;
-using System.ComponentModel.DataAnnotations;
+
 using Godot;
 
 public partial class GamemodeCore : Node
 {
+
+
     public void StartGame()
+    {
+        // (after setting up multiplayer)
+        // wait for enough players in lobby
+        //      set players per team from resource
+        //      as players join, sort into teams
+        // (once enough players)
+        // load information from resource (set by the server / authority ??)
+        //      set timer
+        //      set player positions / ball position
+        // ensure score is at zero
+        // play any starting animation or countdown or whatever
+        // rock out with our socks out??
+
+    }
+
+    public void EndGame()
+    {
+        
+    }
+
+    public void StartPoint()
     {
         Godot.Collections.Array<Node> children = GetParent().GetChildren();
         for (int i = 0; i < children.Count; i++)
@@ -16,7 +38,9 @@ public partial class GamemodeCore : Node
                 player.stateMachine.ChangeState(player.GetNode<State>("StateMachine/fullcharge"));
                 PhysicsDirectBodyState2D state = PhysicsServer2D.BodyGetDirectState(body.GetRid());
                 state.Sleeping = true;
-                state.Transform = new Transform2D(0,player.startPos);
+                state.Transform = new Transform2D(0, player.startPos);
+                state.AngularVelocity = 0;
+                state.LinearVelocity = Vector2.Zero;
                 body._IntegrateForces(state);
                 body.SetDeferred("Freeze", false);
             }
@@ -26,14 +50,16 @@ public partial class GamemodeCore : Node
                 RigidBody2D body = ball.GetNode<RigidBody2D>("BallBody");
                 PhysicsDirectBodyState2D state = PhysicsServer2D.BodyGetDirectState(body.GetRid());
                 state.Sleeping = true;
-                state.Transform = new Transform2D(0,new Vector2(960f,350f));
+                state.Transform = new Transform2D(0, new Vector2(960f, 350f));
+                state.AngularVelocity = 0;
+                state.LinearVelocity = Vector2.Zero;
                 body._IntegrateForces(state);
                 body.SetDeferred("Freeze", false);
             }
         }
     }
     
-    public void EndGame()
+    public void EndPoint()
     {
         
     }
@@ -61,12 +87,12 @@ public partial class GamemodeCore : Node
                 RigidBody2D body = ball.GetNode<RigidBody2D>("BallBody");
                 body.SetDeferred("Freeze", true);
             }
-            GetNode<Timer>("StartGameTimer").Start();
+            GetNode<Timer>("StartPointTimer").Start();
         }
         // re-engage starting sequence (probably a function in this script)
     }
-    public void StartGameTimerTimeout()
+    public void StartPointTimerTimeout()
     {
-        StartGame();
+        StartPoint();
     }
 }
