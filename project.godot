@@ -65,6 +65,7 @@ attack={
 2d_physics/layer_4="ball"
 2d_physics/layer_5="hoop"
 2d_physics/layer_6="background"
+2d_physics/layer_7="scoring"
 
 [rendering]
 

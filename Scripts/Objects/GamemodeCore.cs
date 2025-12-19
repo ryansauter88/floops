@@ -83,6 +83,7 @@ public partial class GamemodeCore : Node
             {
                 Node2D ball = (Node2D)children[i];
                 RigidBody2D body = ball.GetNode<RigidBody2D>("BallBody");
+                body.SetCollisionMaskValue(7, true);
                 PhysicsDirectBodyState2D state = PhysicsServer2D.BodyGetDirectState(body.GetRid());
                 state.Sleeping = true;
                 state.Transform = new Transform2D(0, new Vector2(960f, 350f));
@@ -130,6 +131,7 @@ public partial class GamemodeCore : Node
             {
                 Node2D ball = (Node2D)children[i];
                 RigidBody2D body = ball.GetNode<RigidBody2D>("BallBody");
+                body.SetCollisionMaskValue(7, false);
                 body.SetDeferred("Freeze", true);
             }
             GetNode<Timer>("StartPointTimer").Start();
