@@ -3,6 +3,41 @@ using Godot;
 
 public partial class GamemodeCore : Node
 {
+    RichTextLabel timerText;
+    RichTextLabel leftScoreText;
+    RichTextLabel rightScoreText;
+    float gameTime = 18000; // FRAMES (assuming 60fps, i know there's a way to make it frame independent but i'll figure that out later)
+    int leftTeamScore = 0;
+    int rightTeamScore = 0;
+    int playersPerTeam;
+    bool stopTimer;
+    string selectedMode;
+
+    public override void _Ready()
+    {
+        timerText = GetParent().GetNode<RichTextLabel>("CanvasObject/TimerObject/TimerText");
+        leftScoreText = GetParent().GetNode<RichTextLabel>("CanvasObject/ScoreboardObject/ScoreboardContainer/LeftTeamScoreText");
+        rightScoreText = GetParent().GetNode<RichTextLabel>("CanvasObject/ScoreboardObject/ScoreboardContainer/RightTeamScoreText");
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+        if (!stopTimer)
+        {
+            gameTime -=1;
+            float realTime = Mathf.Floor(gameTime / 60);
+            float minutes = Mathf.Floor(realTime / 60);
+            float seconds = realTime - (60 * minutes);
+            if (seconds < 10) {timerText.Text = "[b]"+minutes+":0"+seconds+"[/b]";}
+            else {timerText.Text = "[b]"+minutes+":"+seconds+"[/b]";}
+        }
+    }
+
+    public void GameTimerCountdown()
+    {
+        
+    }
 
 
     public void StartGame()
@@ -57,6 +92,7 @@ public partial class GamemodeCore : Node
                 body.SetDeferred("Freeze", false);
             }
         }
+        stopTimer = false;
     }
     
     public void EndPoint()
@@ -64,13 +100,22 @@ public partial class GamemodeCore : Node
         
     }
 
-    public void BallScored()
+    public void BallScored(int teamFlag)
     {
-        // set all players to inactive
         // celebration effects go here?
         // update scoreboard
-        // reset positions
+        if (teamFlag == 0) {
+            rightTeamScore += 1;
+            rightScoreText.Text = rightTeamScore.ToString();
+        }
+        if (teamFlag == 1) {
+            leftTeamScore += 1;
+            leftScoreText.Text = leftTeamScore.ToString();
+        }
 
+        // set all players to inactive
+        // reset positions
+        stopTimer = true;
         Godot.Collections.Array<Node> children = GetParent().GetChildren();
         for (int i = 0; i < children.Count; i++)
         {

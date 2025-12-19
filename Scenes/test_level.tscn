@@ -28,6 +28,7 @@ position = Vector2(125, 600)
 position = Vector2(1795, 600)
 rotation = -3.1415927
 scale = Vector2(1, -1)
+teamFlag = 1
 
 [node name="BallObject" parent="." instance=ExtResource("3_7w7ni")]
 position = Vector2(960, 350)
