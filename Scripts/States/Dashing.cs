@@ -39,7 +39,11 @@ public partial class Dashing : State
         }
         return null;
     }
-
+    public override State ProcessInput(InputEvent @event)
+    {
+        if (GetGravityInput()) {body.GravityScale = -body.GravityScale;controller.gravityChange = false;}
+        return null;
+    }
     public void ProcessDash(RigidBody2D rigidBody)
     {
         // applies a force (which is reduced by the percentage of current frame of dash over total dash frames) in the direction the arrow is pointing

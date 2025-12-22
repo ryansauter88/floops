@@ -17,6 +17,7 @@ public partial class HalfCharge : State
     public override State ProcessInput(InputEvent @event)
     {
         if (GetDashInput()) {return dashing;}
+        if (GetGravityInput()) {body.GravityScale = -body.GravityScale;controller.gravityChange = false;}
         return null;
     }
 

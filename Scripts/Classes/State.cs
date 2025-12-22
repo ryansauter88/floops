@@ -41,4 +41,8 @@ public partial class State : Node {
     public bool GetDashInput() {
         return controller.WantsDash();
     }
+
+    public bool GetGravityInput() {
+        return controller.WantsGravityChange();
+    }
 }

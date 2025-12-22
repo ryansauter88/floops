@@ -14,6 +14,12 @@ public partial class NoCharge : State
         return null;
     }
 
+    public override State ProcessInput(InputEvent @event)
+    {
+        if (GetGravityInput()) {body.GravityScale = -body.GravityScale;controller.gravityChange = false;}
+        return null;
+    }
+
     public void ProcessRotation(RigidBody2D rigidBody)
     {
         rotationInput = controller.GetMovementFloat();

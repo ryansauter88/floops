@@ -10,6 +10,7 @@ radius = 40.0
 [node name="BallObject" type="Node2D"]
 
 [node name="BallBody" type="RigidBody2D" parent="."]
+position = Vector2(0, -1)
 collision_layer = 8
 collision_mask = 95
 mass = 0.01

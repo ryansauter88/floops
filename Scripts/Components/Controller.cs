@@ -12,6 +12,7 @@ public partial class Controller : Node {
     */
     
     public float moveInput = 0;
+    public bool gravityChange = false;
 
     public bool attackPress = false;
 
@@ -19,6 +20,9 @@ public partial class Controller : Node {
 
     public float GetMovementFloat() {
         return moveInput;
+    }
+    public bool WantsGravityChange() {
+        return gravityChange;
     }
     public bool WantsAttack() {
         return attackPress;

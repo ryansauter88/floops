@@ -32,6 +32,11 @@ public partial class PlayerObject : Node2D
             bufferTimer.Start();
             controller.dashPress = true;
         }
+        if(@event.IsActionPressed("gravity")) {
+            lastInput = "gravity";
+            bufferTimer.Start();
+            controller.gravityChange = true;
+        }
 		stateMachine.ProcessInput(@event);
 	}
 	public override void _PhysicsProcess(double delta)
@@ -61,6 +66,7 @@ public partial class PlayerObject : Node2D
     public void InputBufferTimerTimeout() {
         if (lastInput == "dash") {controller.dashPress = false;}
         if (lastInput == "attack") {controller.attackPress = false;}
+        if (lastInput == "gravity") {controller.gravityChange = false;}
         lastInput = "";
     }
 }

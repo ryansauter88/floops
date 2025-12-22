@@ -15,6 +15,7 @@ public partial class FullCharge : State
     public override State ProcessInput(InputEvent @event)
     {
         if (GetDashInput()) {return dashing;}
+        if (GetGravityInput()) {body.GravityScale = -body.GravityScale;controller.gravityChange = false;}
         return null;
     }
     public void ProcessRotation(RigidBody2D rigidBody)
