@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="FLOOPS"
-run/main_scene="uid://bwgmvuwsst2tc"
+run/main_scene="uid://c0x8lptm26pi5"
 config/features=PackedStringArray("4.5", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Singularity="*res://Scripts/Objects/Singularity.cs"
 
 [display]
 

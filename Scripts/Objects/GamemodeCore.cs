@@ -6,6 +6,7 @@ public partial class GamemodeCore : Node
     RichTextLabel timerText;
     RichTextLabel leftScoreText;
     RichTextLabel rightScoreText;
+    Singularity sceneSwapper;
     float gameTime = 18000; // FRAMES (assuming 60fps, i know there's a way to make it frame independent but i'll figure that out later)
     int leftTeamScore = 0;
     int rightTeamScore = 0;
@@ -18,6 +19,7 @@ public partial class GamemodeCore : Node
         timerText = GetParent().GetNode<RichTextLabel>("CanvasObject/TimerObject/TimerText");
         leftScoreText = GetParent().GetNode<RichTextLabel>("CanvasObject/ScoreboardObject/ScoreboardContainer/LeftTeamScoreText");
         rightScoreText = GetParent().GetNode<RichTextLabel>("CanvasObject/ScoreboardObject/ScoreboardContainer/RightTeamScoreText");
+        sceneSwapper = GetTree().Root.GetNode<Singularity>("Singularity");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -31,6 +33,10 @@ public partial class GamemodeCore : Node
             float seconds = realTime - (60 * minutes);
             if (seconds < 10) {timerText.Text = "[b]"+minutes+":0"+seconds+"[/b]";}
             else {timerText.Text = "[b]"+minutes+":"+seconds+"[/b]";}
+        }
+        if (gameTime <= 0)
+        {
+            EndGame();
         }
     }
 
@@ -58,7 +64,9 @@ public partial class GamemodeCore : Node
 
     public void EndGame()
     {
-        
+        // play any starting animation or countdown or whatever
+        // rock out with our socks out??
+        sceneSwapper.ChangeSceneMenuLevel();
     }
 
     public void StartPoint()
@@ -98,22 +106,6 @@ public partial class GamemodeCore : Node
     
     public void EndPoint()
     {
-        
-    }
-
-    public void BallScored(int teamFlag)
-    {
-        // celebration effects go here?
-        // update scoreboard
-        if (teamFlag == 0) {
-            rightTeamScore += 1;
-            rightScoreText.Text = rightTeamScore.ToString();
-        }
-        if (teamFlag == 1) {
-            leftTeamScore += 1;
-            leftScoreText.Text = leftTeamScore.ToString();
-        }
-
         // set all players to inactive
         // reset positions
         stopTimer = true;
@@ -137,6 +129,22 @@ public partial class GamemodeCore : Node
             GetNode<Timer>("StartPointTimer").Start();
         }
         // re-engage starting sequence (probably a function in this script)
+    }
+
+    public void BallScored(int teamFlag)
+    {
+        // celebration effects go here?
+        // update scoreboard
+        if (teamFlag == 0) {
+            rightTeamScore += 1;
+            rightScoreText.Text = rightTeamScore.ToString();
+        }
+        if (teamFlag == 1) {
+            leftTeamScore += 1;
+            leftScoreText.Text = leftTeamScore.ToString();
+        }
+
+        EndPoint();
     }
     public void StartPointTimerTimeout()
     {

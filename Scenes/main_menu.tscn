@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0x8lptm26pi5"]
+
+[ext_resource type="Script" uid="uid://bdpjumr4q2164" path="res://Scripts/UI/JoinGame.cs" id="1_1ehe0"]
+[ext_resource type="Script" uid="uid://cu4b86royf4qj" path="res://Scripts/UI/Settings.cs" id="2_ce3w2"]
+[ext_resource type="Script" uid="uid://ctrhtpju4fbc1" path="res://Scripts/UI/QuitGame.cs" id="3_n45e2"]
+
+[node name="MainMenu" type="Node"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TitleGraphic" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/TitleGraphic"]
+layout_mode = 0
+offset_left = 736.0
+offset_top = 146.0
+offset_right = 1186.0
+offset_bottom = 294.0
+theme_override_font_sizes/bold_italics_font_size = 108
+bbcode_enabled = true
+text = "[b][i]FLOOPS[/i][/b]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="JoinGameObject" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_1ehe0")
+
+[node name="JoinGameButton" type="Button" parent="CanvasLayer/JoinGameObject"]
+layout_mode = 0
+offset_left = 703.0
+offset_top = 488.0
+offset_right = 1220.0
+offset_bottom = 628.0
+theme_override_font_sizes/font_size = 96
+text = "JOIN GAME"
+
+[node name="SettingsObject" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_ce3w2")
+
+[node name="SettingsButton" type="Button" parent="CanvasLayer/SettingsObject"]
+layout_mode = 0
+offset_left = 740.0
+offset_top = 707.0
+offset_right = 1190.0
+offset_bottom = 847.0
+theme_override_font_sizes/font_size = 96
+text = "SETTINGS"
+
+[node name="QuitObject" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_n45e2")
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/QuitObject"]
+layout_mode = 0
+offset_left = 672.0
+offset_top = 934.0
+offset_right = 1275.0
+offset_bottom = 1074.0
+theme_override_font_sizes/font_size = 96
+text = "CLOSE GAME"
+
+[connection signal="pressed" from="CanvasLayer/JoinGameObject/JoinGameButton" to="CanvasLayer/JoinGameObject" method="JoinButtonPress"]
+[connection signal="pressed" from="CanvasLayer/QuitObject/QuitButton" to="CanvasLayer/QuitObject" method="QuitButtonPress"]
