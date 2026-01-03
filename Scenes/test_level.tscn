@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bwgmvuwsst2tc"]
+[gd_scene load_steps=7 format=3 uid="uid://bwgmvuwsst2tc"]
 
 [ext_resource type="Script" uid="uid://cfm8q6itwtxqm" path="res://Scripts/Objects/GamemodeCore.cs" id="1_7w7ni"]
 [ext_resource type="PackedScene" uid="uid://dcwc1d8tnrwg1" path="res://Scenes/chamber_object.tscn" id="1_eglq2"]
+[ext_resource type="Script" uid="uid://he0208fir726" path="res://Scripts/Objects/MultiplayerCore.cs" id="2_btda1"]
 [ext_resource type="PackedScene" uid="uid://bw5ow7pii62tr" path="res://Scenes/player_object.tscn" id="2_rsyfn"]
 [ext_resource type="PackedScene" uid="uid://2guxaj6o2v7e" path="res://Scenes/ball_object.tscn" id="3_7w7ni"]
 [ext_resource type="PackedScene" uid="uid://ccqccq3tehgdp" path="res://Scenes/hoop_object.tscn" id="3_rsyfn"]
@@ -15,6 +16,7 @@ script = ExtResource("1_7w7ni")
 one_shot = true
 
 [node name="MultiplayerCore" type="Node" parent="."]
+script = ExtResource("2_btda1")
 
 [node name="ChamberObject" parent="." instance=ExtResource("1_eglq2")]
 
